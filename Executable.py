@@ -11,4 +11,6 @@ mainWindow = tkinter.Tk()
 #This initializes the GUI_Utilities class, most functions that interact with tkinter should be clustered in there as functions.
 App = AppWindow(master=mainWindow)
 
+frame1 = App.createFrame(parent=App, side = "top", h = 300, w = 300, bg = "red")
+
 App.mainloop()
