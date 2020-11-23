@@ -10,13 +10,9 @@ mainWindow = tkinter.Tk()
 
 #This initializes the GUI_Utilities class, most functions that interact with tkinter should be clustered in there as functions.
 App = AppWindow(master=mainWindow)
-
-#frame1 = App.createFrame(parent=App, side = "top", h = 300, w = 300, bg = "red")
-frame5 = Frame(mainWindow, bg = "red", height = 300, width = 300)
-frame5.pack(side = tkinter.TOP)
-frame4 = Frame(frame5, bg = "yellow", height = 30, width = 30)
-frame4.pack(side = tkinter.LEFT)
-#frame2 = App.createFrame(parent=frame1, side="left", h = 30, w = 30, bg = "yellow")
-#frame3 = App.createFrame(parent=frame1, side="right", h = 30, w = 30, bg = "yellow")
+App.editTitle('Project Tracker')
+#This frame can hold any menus we need
+MenuFrame = App.createFrame(parent=App, side = 'top')
+ScrollFrame = App.createFrame(parent=App, side = 'right')
 
 App.mainloop()

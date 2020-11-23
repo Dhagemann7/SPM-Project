@@ -15,7 +15,10 @@ class AppWindow(tkinter.Frame):
         }
         return screenDimensions
 
-    def createFrame(self, parent, side, h, w, bg):
-        frame = Frame(parent, height = h, width = w, bg = bg)
+    def createFrame(self, parent, side):
+        frame = Frame(parent)
         frame.pack(side = side)
         return frame
+
+    def editTitle(self, title):
+        self.master.title(title)
