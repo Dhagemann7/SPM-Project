@@ -18,7 +18,7 @@ App = AppWindow(master=mainWindow)
 App.editTitle('Project Tracker')
 
 #Here's an example of how to put in things into the window.
-BackgroundImage = App.enterImage(mainWindow, 'Temp Button-1.png', 'top', App.width, App.height)
+ExitImage = App.enterImage(mainWindow, 'Temp Button-1.png', 'top', 'nw', 200, 100)
 members = ['Dave', 'Haiden', 'Kyleel', 'Caleb']
 risks = ['risk1', 'risk2']
 riskStatus = ['riskstatus1', 'riskstatus2']
