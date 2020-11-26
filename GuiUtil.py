@@ -35,12 +35,12 @@ class AppWindow(tkinter.Frame):
     def editTitle(self, title):
         self.master.title(title)
 
-    def enterImage(self, parent, fileName, side, width, height):
+    def enterImage(self, parent, fileName, side, anchor, width, height):
         AssetPath = str(os.path.dirname(os.path.realpath(__file__))) + '\\Assets\\' + fileName
         img = PIL.Image.open(AssetPath)
         img = img.resize((width, height), PIL.Image.ANTIALIAS)
         img = ImageTk.PhotoImage(img)
         panel = Label(parent, image = img)
         panel.image = img
-        panel.pack(side = side)
+        panel.pack(side = side, anchor = anchor)
         return panel
