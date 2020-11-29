@@ -1,5 +1,6 @@
 import tkinter
 import GuiUtil
+import Commands
 from GuiUtil import AppWindow
 from tkinter import Tk
 #For some reason, JUST importing this module makes the maximize function in Tkinter use the correct screen resolution.
@@ -13,11 +14,28 @@ from ProjectUtil import Project
 #The information between these two will be run in a loop.
 mainWindow = tkinter.Tk()
 
+#Values
+risk1 = ''
+risk2 = ''
+riskinput1 = ''
+riskinput2 = ''
+
 #This initializes the GuiUtil class, most functions that interact with tkinter should be clustered in there as functions.
 App = AppWindow(master=mainWindow)
 App.editTitle('Project Tracker')
 
 #Here's an example of how to put in things into the window.
 BackgroundImage = App.enterImage(mainWindow, 'Temp Button-1.png', 'top', App.width, App.height)
+risk1label = tkinter.Label(mainWindow, text = 'Risk 1')
+risk1label.place(relx=0.45, rely=0.48, anchor='n')
+risk1Entry = tkinter.Entry(mainWindow, textvariable=riskinput1)
+risk1Entry.place(relx=0.45, rely=0.5, anchor='n')
+
+risk2label = tkinter.Label(mainWindow, text = 'Risk 2')
+risk2label.place(relx=0.65, rely=0.48, anchor='n')
+risk2Entry = tkinter.Entry(mainWindow, textvariable=riskinput2)
+risk2Entry.place(relx=0.65, rely=0.5, anchor='n')
+
+ExitImage = App.enterImageButton(mainWindow, 'Temp Button-1.png', 'top', 'nw', 200, 100, Commands.ExitButton)
 
 App.mainloop()
