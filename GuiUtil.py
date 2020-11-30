@@ -1,5 +1,6 @@
 import os 
 import tkinter
+import Commands
 from tkinter import *
 #Pillow is not included in standard library, must be installed to your python library first.
 import PIL
@@ -43,4 +44,14 @@ class AppWindow(tkinter.Frame):
         panel = Label(parent, image = img)
         panel.image = img
         panel.pack(side = side, anchor = anchor)
+        return panel
+
+    def enterImageButton(self, parent, fileName, side, anchor, width, height, Command):
+        AssetPath = str(os.path.dirname(os.path.realpath(__file__))) + '\\Assets\\' + fileName
+        img = PIL.Image.open(AssetPath)
+        img = img.resize((width, height), PIL.Image.ANTIALIAS)
+        img = ImageTk.PhotoImage(img)
+        panel = Button(parent, image=img, command = Command)
+        panel.image = img
+        panel.pack(side=side, anchor=anchor)
         return panel
