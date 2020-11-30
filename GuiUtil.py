@@ -19,6 +19,8 @@ class AppWindow(tkinter.Frame):
         self.height = dimFrame.winfo_height()
         dimFrame.pack_forget()
         dimFrame.destroy()
+        self.menuButtons = {}
+        self.loadMenu()
         
 
     def getScreenSize(self):
@@ -55,3 +57,21 @@ class AppWindow(tkinter.Frame):
         panel.image = img
         panel.pack(side=side, anchor=anchor)
         return panel
+
+    def removeMenu(self):
+        #print(self.menuButtons)
+        self.menuButtons['AddProject'].place_forget()
+        self.menuButtons['AddHours'].place_forget()
+        self.menuButtons['ViewProjects'].place_forget()
+
+    def loadMenu(self):
+        BackgroundImage = self.enterImage(self.master, 'Background.jpg', 'top', 'center', self.width, self.height)
+        ExitImage = self.enterImageButton(self.master, 'ExitButton.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        ExitImage.place(relx=0.003, rely=0.01, anchor = 'nw')
+        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.menuButtons['AddHours'].place(relx=0.5, rely=0.5, anchor = 'center')
+        self.menuButtons['ViewProjects'] = self.enterImageButton(self.master, 'ViewProjects.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.menuButtons['ViewProjects'].place(relx=0.5, rely=0.7, anchor = 'center')
+        self.menuButtons['AddProject'] = self.enterImageButton(self.master, 'AddProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.removeMenu)
+        self.menuButtons['AddProject'].place(relx=0.5, rely=0.3, anchor = 'center')
+        #self.menuButtons['AddProject'].Command = Commands.removeMenu(self.menuButtons)
