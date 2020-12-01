@@ -22,13 +22,25 @@ def AddProject():
         #Project Owner
         #Project Team Members
         #Project Description
-        #Project Risks/Risk Status
 
     #get input from fields
 
-    #create Project object from inputs
+    #create Project object from inputs (confirm button) -> go to project view
+
+    #if exit/back button pressed, return to main menu
 
     return
+
+def AddRisks():
+    #removeMenu(buttons) - To Remove Main Menu
+
+    #creates input fields
+        #Risk Name
+        #Risk Status
+
+    #adds risks to project (confirm button)
+
+    #if exit/back button pressed, return to project view
 
 def AddRequirements():
     #removeMenu(buttons) - To Remove Main Menu
@@ -39,7 +51,9 @@ def AddRequirements():
 
     #get input from fields
 
-    #add requirements to project
+    #add requirements to project (confirm button) -> return to project view
+
+    #if exit/back button pressed, return to project view
 
     return
 
@@ -56,14 +70,19 @@ def AddHours():
 
     #get input from fields
 
-    #add week to project
+    #add week to project (confirm button) -> return to project view
+
+    #if exit/back button pressed, return to main menu
 
     return
 
 def ViewProject():
     #removeMenu(buttons) - To Remove Main Menu
 
-    #display base project info + requirements
+    #prompts user for project to display
+    #display that project's info + risks + requirements
+
+    #if exit/back button pressed, return to main menu
 
     return
 
@@ -71,6 +90,8 @@ def ViewHours():
     #removeMenu(buttons) - To Remove Main Menu
 
     #display project hours organized by type
+
+    #if exit/back button pressed, return to project view
 
     return
 
