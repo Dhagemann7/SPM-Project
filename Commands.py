@@ -15,29 +15,37 @@ def removeMenu(buttons):
     return
 
 def AddProject(name,owner,members,description):
-    #create Project object from inputs (confirm button) -> go to project view
+    #create new Project object from inputs (confirm button) -> go to project view
         #Project Name
         #Project Owner
         #Project Team Members
         #Project Description
+
+    #newProject = Project(name,owner,members,description)
+
+    #add Project object to array of projects
 
     #go to project view
 
     return
 
 def AddRisks(project,riskName,status):
-    #adds risks to project (confirm button)
+    #adds risks to existing project (confirm button)
         #Risk Name
         #Risk Status
+
+    project.addRisk(riskName,status)
 
     #return to project view
 
     return
 
-def AddRequirements(project,functional,nonfunctional):
+def AddRequirements(project, rtype, requirement):
     #add requirements to project (confirm button)
         #Functional Requirements
         #Non-Functional Requirements
+
+    project.addRequirement(rtype, requirement)
 
     # return to project view
 
@@ -51,6 +59,8 @@ def AddHours(project,week,requirementsHours,designHours,codingHours,testingHours
         #Coding Hours
         #Testing Hours
         #Project Management Hours
+
+    project.addWeekHours(requirementsHours,designHours,codingHours,testingHours,projManagementHours)
 
     #return to project view
 
