@@ -273,6 +273,8 @@ class AppWindow(tkinter.Frame):
                 pass
         if(found):
             newRow = contents['rows'][row]
+            print(len(newRow))
+            print(len(hourList))
             newRow[8] = hourList[0]
             newRow[9] = hourList[1]
             newRow[10] = hourList[2]
@@ -281,6 +283,15 @@ class AppWindow(tkinter.Frame):
             newRow[13] = hourList[5]
             newRow[14] = hourList[6]
             newProj.editRow(self.addprojectUI['ProjectNameEntry'].get(), row, newRow)
+        else:
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
+            newRow.append('')
         self.removehoursmenu()
         return
 
