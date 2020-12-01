@@ -25,7 +25,7 @@ def AddProject(name,owner,members,description):
 
     return
 
-def AddRisks(name,status):
+def AddRisks(project,riskName,status):
     #adds risks to project (confirm button)
         #Risk Name
         #Risk Status
@@ -34,8 +34,8 @@ def AddRisks(name,status):
 
     return
 
-def AddRequirements(functional,nonfunctional):
-    #add requirements to project (confirm button) -> 
+def AddRequirements(project,functional,nonfunctional):
+    #add requirements to project (confirm button)
         #Functional Requirements
         #Non-Functional Requirements
 
@@ -43,7 +43,7 @@ def AddRequirements(functional,nonfunctional):
 
     return
 
-def AddHours(week,requirementsHours,designHours,codingHours,testingHours,projManagementHours):
+def AddHours(project,week,requirementsHours,designHours,codingHours,testingHours,projManagementHours):
     #add hours to project (confirm button)
         #Week Number
         #Requirements Analysis Hours
