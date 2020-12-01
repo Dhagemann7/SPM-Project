@@ -11,11 +11,8 @@ def ExitButton():
 
 def removeMenu(buttons):
     print(buttons)
-    buttons['AddHours'].place_forget() #AddHoursViewProjects
-    #buttons['AddHours'].place_destroy()
-
-def doNothing():
-    pass
+    buttons['AddHours'].place_forget()
+    return
 
 #def Writer(i, input):
 #    projectwriter = Project()
