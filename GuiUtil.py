@@ -79,9 +79,9 @@ class AppWindow(tkinter.Frame):
     def loadMenu(self):
 
         BackgroundImage = self.enterImage(self.master, 'Background.jpg', 'top', 'center', self.width, self.height)
-        self.menuButtons['Exit'] = self.enterImageButton(self.master, 'ExitButton.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.menuButtons['Exit'] = self.enterImageButton(self.master, 'Exit.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
         self.menuButtons['Exit'].place(relx=0.003, rely=0.01, anchor = 'nw')
-        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
+        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'ViewHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
         self.menuButtons['AddHours'].place(relx=0.5, rely=0.5, anchor = 'center')
         self.menuButtons['ViewProjects'] = self.enterImageButton(self.master, 'ViewProjects.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addViewProject)
         self.menuButtons['ViewProjects'].place(relx=0.5, rely=0.7, anchor = 'center')
@@ -92,7 +92,7 @@ class AppWindow(tkinter.Frame):
     def addprojectmenu(self):
 
         self.removeMenu()
-        self.addprojectUI['BackButtonProject'] = self.enterImageButtonTwoFunc(self.master, 'ExitButton.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.removeprojectmenu, self.loadMenu)
+        self.addprojectUI['BackButtonProject'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.removeprojectmenu, self.loadMenu)
         self.addprojectUI['BackButtonProject'].place(relx=0.003, rely=0.01, anchor = 'nw')
 
         self.addprojectUI['NameLabel'] = tkinter.Label(self.master, text = 'Project Name')
@@ -101,7 +101,7 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['NameEntry'] = tkinter.Entry(self.master)
         self.addprojectUI['NameEntry'].place(relx=0.25, rely=0.5)
 
-        self.addprojectUI['SaveProject'] = self.enterImageButton(self.master, 'AddProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.addprojectUI['SaveProject'] = self.enterImageButton(self.master, 'SaveProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
         self.addprojectUI['SaveProject'].place(relx=0.5, rely=0.9, anchor='center')
 
 
@@ -116,14 +116,14 @@ class AppWindow(tkinter.Frame):
     def addHoursmenu(self):
 
         self.removeMenu()
-        self.addprojectUI['BackButtonHours'] = self.enterImageButtonTwoFunc(self.master, 'ExitButton.png', 'top', 'center',
+        self.addprojectUI['BackButtonHours'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top', 'center',
                                                                        int(self.width * .1), int(self.height * .1),
                                                                        self.removehoursmenu, self.loadMenu)
         self.addprojectUI['BackButtonHours'].place(relx=0.003, rely=0.01, anchor='nw')
 
 
 
-        self.addprojectUI['Addhours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center',
+        self.addprojectUI['Addhours'] = self.enterImageButton(self.master, 'Submit.png', 'top', 'center',
                                                               int(self.width * .1), int(self.height * .1),
                                                               Commands.ExitButton)
         self.addprojectUI['Addhours'].place(relx=0.5, rely=0.9, anchor = 'center')
@@ -153,20 +153,27 @@ class AppWindow(tkinter.Frame):
 
         self.removeMenu()
 
-        self.addprojectUI['BackButtonView'] = self.enterImageButtonTwoFunc(self.master, 'ExitButton.png', 'top',
+        self.addprojectUI['BackButtonView'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top',
                                                                             'center',
                                                                             int(self.width * .1), int(self.height * .1),
                                                                             self.removeViewProject, self.loadMenu)
         self.addprojectUI['BackButtonView'].place(relx=0.003, rely=0.01, anchor='nw')
 
-        self.addprojectUI['Project1'] = tkinter.Label(self.master, text = 'Projects')
-        self.addprojectUI['Project1'].place(relx=0.5, rely=.5)
+        self.addprojectUI['EnterProject'] = tkinter.Label(self.master, text = 'Type in Project name to load.')
+        self.addprojectUI['EnterProject'].place(relx=0.5, rely=.45)
+        self.addprojectUI['LoadEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['LoadEntry'].place(relx=0.5, rely=.5)
+        self.addprojectUI['LoadProject'] = self.enterImageButton(self.master, 'LoadProject.png', 'top', 'center',
+                                                              int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.addprojectUI['LoadProject'].place(relx=0.5,rely=.9, anchor= 'center')
 
         return
 
     def removeViewProject(self):
         self.addprojectUI['BackButtonView'].place_forget()
-        self.addprojectUI['Project1'].place_forget()
+        self.addprojectUI['EnterProject'].place_forget()
+        self.addprojectUI['LoadEntry'].place_forget()
+        self.addprojectUI['LoadProject'].place_forget()
         return
 
 
