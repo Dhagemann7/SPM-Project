@@ -14,67 +14,57 @@ def removeMenu(buttons):
     buttons['AddHours'].place_forget()
     return
 
-def AddProject():
-    #removeMenu(buttons) - To Remove Main Menu
-
-    #create input fields
+def AddProject(name,owner,members,description):
+    #create new Project object from inputs (confirm button) -> go to project view
         #Project Name
         #Project Owner
         #Project Team Members
         #Project Description
-        #Project Risks/Risk Status
 
-    #get input from fields
+    #newProject = Project(name,owner,members,description)
 
-    #create Project object from inputs
+    #add Project object to array of projects
+
+    #go to project view
 
     return
 
-def AddRequirements():
-    #removeMenu(buttons) - To Remove Main Menu
+def AddRisks(project,riskName,status):
+    #adds risks to existing project (confirm button)
+        #Risk Name
+        #Risk Status
 
-    #create input fields
+    #project.addRisk(riskName,status)
+
+    #return to project view
+
+    return
+
+def AddRequirements(project, rtype, requirement):
+    #add requirements to project (confirm button)
         #Functional Requirements
         #Non-Functional Requirements
 
-    #get input from fields
+    #project.addRequirement(rtype, requirement)
 
-    #add requirements to project
+    # return to project view
 
     return
 
-def AddHours():
-    #removeMenu(buttons) - To Remove Main Menu
-
-    #create input fields
-        #Week #
+def AddHours(project,week,requirementsHours,designHours,codingHours,testingHours,projManagementHours):
+    #add hours to project (confirm button)
+        #Week Number
         #Requirements Analysis Hours
         #Design Hours
         #Coding Hours
         #Testing Hours
         #Project Management Hours
 
-    #get input from fields
+    #project.addWeekHours(requirementsHours,designHours,codingHours,testingHours,projManagementHours)
 
-    #add week to project
-
-    return
-
-def ViewProject():
-    #removeMenu(buttons) - To Remove Main Menu
-
-    #display base project info + requirements
+    #return to project view
 
     return
-
-def ViewHours():
-    #removeMenu(buttons) - To Remove Main Menu
-
-    #display project hours organized by type
-
-    return
-
-
 
 #def Writer(i, input):
 #    projectwriter = Project()
