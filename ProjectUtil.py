@@ -114,4 +114,9 @@ class Project():
         with open(self.path, mode = 'w') as projectFileWrite:
             writer = csv.writer(projectFileWrite, delimiter = ',', lineterminator = '\n')
             writer.writerows(rows)
+
+    def addRow(self, row):
+        with open(self.path, mode = 'w') as projectFileWrite:
+            writer = csv.writer(projectFileWrite, delimiter = ',', lineterminator = '\n')
+            writer.writerow(row)
             

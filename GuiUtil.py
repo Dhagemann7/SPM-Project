@@ -76,18 +76,21 @@ class AppWindow(tkinter.Frame):
         self.menuButtons['AddHours'].place_forget()
         self.menuButtons['ViewProjects'].place_forget()
         self.menuButtons['Exit'].place_forget()
+        self.menuButtons['AddRequirements'].place_forget()
 
     def loadMenu(self):
 
         BackgroundImage = self.enterImage(self.master, 'Background.jpg', 'top', 'center', self.width, self.height)
         self.menuButtons['Exit'] = self.enterImageButton(self.master, 'Exit.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
         self.menuButtons['Exit'].place(relx=0.003, rely=0.01, anchor = 'nw')
-        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'ViewHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
-        self.menuButtons['AddHours'].place(relx=0.5, rely=0.5, anchor = 'center')
+        self.menuButtons['AddRequirements'] = self.enterImageButton(self.master, 'AddRequirements.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
+        self.menuButtons['AddRequirements'].place(relx=0.5, rely=0.4, anchor = 'center')
+        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
+        self.menuButtons['AddHours'].place(relx=0.5, rely=0.6, anchor = 'center')
         self.menuButtons['ViewProjects'] = self.enterImageButton(self.master, 'ViewProjects.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addViewProject)
-        self.menuButtons['ViewProjects'].place(relx=0.5, rely=0.7, anchor = 'center')
+        self.menuButtons['ViewProjects'].place(relx=0.5, rely=0.8, anchor = 'center')
         self.menuButtons['AddProject'] = self.enterImageButton(self.master, 'AddProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addprojectmenu)
-        self.menuButtons['AddProject'].place(relx=0.5, rely=0.3, anchor = 'center')
+        self.menuButtons['AddProject'].place(relx=0.5, rely=0.2, anchor = 'center')
         #self.menuButtons['AddProject'].Command = Commands.removeMenu(self.menuButtons)
 
 
@@ -173,18 +176,112 @@ class AppWindow(tkinter.Frame):
 
         self.addprojectUI['Addhours'] = self.enterImageButton(self.master, 'Submit.png', 'top', 'center',
                                                               int(self.width * .1), int(self.height * .1),
-                                                              Commands.ExitButton)
+                                                              Command = lambda: self.addHours())
         self.addprojectUI['Addhours'].place(relx=0.5, rely=0.9, anchor = 'center')
 
-        self.addprojectUI['MainHoursLabel'] = tkinter.Label(self.master, text='Add daily hours for each task then submit.')
+        self.addprojectUI['MainHoursLabel'] = tkinter.Label(self.master, text='Add weekly hours for each category then submit.')
         self.addprojectUI['MainHoursLabel'].place(relx=0.5, rely=0.05, anchor = 'n')
 
-        self.addprojectUI['ReqHours'] = tkinter.Label(self.master, text='Requirement Hours')
-        self.addprojectUI['ReqHours'].place(relx=0.15, rely=0.45, anchor = 'w')
+        self.addprojectUI['ProjectNameLabel'] = tkinter.Label(self.master, text='Project Name')
+        self.addprojectUI['ProjectNameLabel'].place(relx=0.15, rely=0.35, anchor = 'w')
+        
+        self.addprojectUI['ProjectNameEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['ProjectNameEntry'].place(relx=0.15, rely=0.4, anchor = 'w')
 
-        self.addprojectUI['ReqEntry'] = tkinter.Entry(self.master)
-        self.addprojectUI['ReqEntry'].place(relx=0.15, rely=0.5, anchor = 'w')
+        self.addprojectUI['WeekNumberLabel'] = tkinter.Label(self.master, text='Week Number')
+        self.addprojectUI['WeekNumberLabel'].place(relx=0.35, rely=0.35, anchor = 'w')
 
+        self.addprojectUI['WeekNumberEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['WeekNumberEntry'].place(relx=0.35, rely=0.4, anchor = 'w')
+
+        self.addprojectUI['PersonHoursTotalLabel'] = tkinter.Label(self.master, text='Person Hours Total')
+        self.addprojectUI['PersonHoursTotalLabel'].place(relx=0.55, rely=0.35, anchor = 'w')
+
+        self.addprojectUI['PersonHoursTotalEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['PersonHoursTotalEntry'].place(relx=0.55, rely=0.4, anchor = 'w')
+
+        self.addprojectUI['RequirementsAnalysisLabel'] = tkinter.Label(self.master, text='Requirements Analysis Hours')
+        self.addprojectUI['RequirementsAnalysisLabel'].place(relx=0.75, rely=0.35, anchor = 'w')
+
+        self.addprojectUI['RequirementsAnalysisEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['RequirementsAnalysisEntry'].place(relx=0.75, rely=0.4, anchor = 'w')
+
+        self.addprojectUI['DesigningLabel'] = tkinter.Label(self.master, text='Designing Hours')
+        self.addprojectUI['DesigningLabel'].place(relx=0.15, rely=0.55, anchor = 'w')
+
+        self.addprojectUI['DesigningEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['DesigningEntry'].place(relx=0.15, rely=0.6, anchor = 'w')
+
+        self.addprojectUI['CodingLabel'] = tkinter.Label(self.master, text='Coding Hours')
+        self.addprojectUI['CodingLabel'].place(relx=0.35, rely=0.55, anchor = 'w')
+
+        self.addprojectUI['CodingEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['CodingEntry'].place(relx=0.35, rely=0.6, anchor = 'w')
+
+        self.addprojectUI['TestingLabel'] = tkinter.Label(self.master, text='Testing Hours')
+        self.addprojectUI['TestingLabel'].place(relx=0.55, rely=0.55, anchor = 'w')
+
+        self.addprojectUI['TestingEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['TestingEntry'].place(relx=0.55, rely=0.6, anchor = 'w')
+
+        self.addprojectUI['ProjectManagementLabel'] = tkinter.Label(self.master, text='Project Management Hours')
+        self.addprojectUI['ProjectManagementLabel'].place(relx=0.75, rely=0.55, anchor = 'w')
+        
+        self.addprojectUI['ProjectManagementEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['ProjectManagementEntry'].place(relx=0.75, rely=0.6, anchor = 'w')
+    
+    def addHours(self):
+        newProj = Project()
+        contents = newProj.readFile(self.addprojectUI['ProjectNameEntry'].get())
+        hourList = []
+        if(self.addprojectUI['WeekNumberEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['WeekNumberEntry'].get())
+        if(self.addprojectUI['PersonHoursTotalEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['PersonHoursTotalEntry'].get())
+        if(self.addprojectUI['RequirementsAnalysisEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['RequirementsAnalysisEntry'].get())
+        if(self.addprojectUI['DesigningEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['DesigningEntry'].get())
+        if(self.addprojectUI['CodingEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['CodingEntry'].get())
+        if(self.addprojectUI['TestingEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['TestingEntry'].get())
+        if(self.addprojectUI['TestingEntry'].get() == ''):
+            hourList.append(0)
+        else:
+            hourList.append(self.addprojectUI['TestingEntry'].get())
+        found = False
+        row = 0
+        for x in range(len(contents['rows'])):
+            if(contents['rows'][x][8] == '' and not found):
+                row = x
+                found = True
+                break
+            else:
+                pass
+        if(found):
+            newRow = contents['rows'][row]
+            newRow[8] = hourList[0]
+            newRow[9] = hourList[1]
+            newRow[10] = hourList[2]
+            newRow[11] = hourList[3]
+            newRow[12] = hourList[4]
+            newRow[13] = hourList[5]
+            newRow[14] = hourList[6]
+            newProj.editRow(self.addprojectUI['ProjectNameEntry'].get(), row, newRow)
+        self.removehoursmenu()
         return
 
     def removehoursmenu(self):
@@ -192,9 +289,23 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['BackButtonHours'].place_forget()
         self.addprojectUI['Addhours'].place_forget()
         self.addprojectUI['MainHoursLabel'].place_forget()
-        self.addprojectUI['ReqHours'].place_forget()
-        self.addprojectUI['ReqEntry'].place_forget()
-
+        self.addprojectUI['ProjectNameLabel'].place_forget()
+        self.addprojectUI['ProjectNameEntry'].place_forget()
+        self.addprojectUI['WeekNumberLabel'].place_forget()
+        self.addprojectUI['WeekNumberEntry'].place_forget()
+        self.addprojectUI['PersonHoursTotalLabel'].place_forget()
+        self.addprojectUI['PersonHoursTotalEntry'].place_forget()
+        self.addprojectUI['RequirementsAnalysisLabel'].place_forget()
+        self.addprojectUI['RequirementsAnalysisEntry'].place_forget()
+        self.addprojectUI['DesigningLabel'].place_forget()
+        self.addprojectUI['DesigningEntry'].place_forget()
+        self.addprojectUI['CodingLabel'].place_forget()
+        self.addprojectUI['CodingEntry'].place_forget()
+        self.addprojectUI['TestingLabel'].place_forget()
+        self.addprojectUI['TestingEntry'].place_forget()
+        self.addprojectUI['ProjectManagementLabel'].place_forget()
+        self.addprojectUI['ProjectManagementEntry'].place_forget()
+        self.loadMenu()
         return
 
     def addViewProject(self):
