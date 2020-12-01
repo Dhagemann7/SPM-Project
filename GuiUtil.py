@@ -160,9 +160,9 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['BackButtonView'].place(relx=0.003, rely=0.01, anchor='nw')
 
         self.addprojectUI['EnterProject'] = tkinter.Label(self.master, text = 'Type in Project name to load.')
-        self.addprojectUI['EnterProject'].place(relx=0.5, rely=.45)
+        self.addprojectUI['EnterProject'].place(relx=0.5, rely=.45, anchor = 'center')
         self.addprojectUI['LoadEntry'] = tkinter.Entry(self.master)
-        self.addprojectUI['LoadEntry'].place(relx=0.5, rely=.5)
+        self.addprojectUI['LoadEntry'].place(relx=0.5, rely=.5, anchor = 'center')
         self.addprojectUI['LoadProject'] = self.enterImageButton(self.master, 'LoadProject.png', 'top', 'center',
                                                               int(self.width * .1), int(self.height * .1), Commands.ExitButton)
         self.addprojectUI['LoadProject'].place(relx=0.5,rely=.9, anchor= 'center')
