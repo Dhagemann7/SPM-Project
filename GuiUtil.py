@@ -264,6 +264,7 @@ class AppWindow(tkinter.Frame):
             hourList.append(self.addprojectUI['TestingEntry'].get())
         found = False
         row = 0
+        newRow = []
         for x in range(len(contents['rows'])):
             if(contents['rows'][x][8] == '' and not found):
                 row = x
@@ -293,6 +294,14 @@ class AppWindow(tkinter.Frame):
             newRow.append('')
             newRow.append('')
             newRow.append('')
+            newRow.append(hourList[0])
+            newRow.append(hourList[1])
+            newRow.append(hourList[2])
+            newRow.append(hourList[3])
+            newRow.append(hourList[4])
+            newRow.append(hourList[5])
+            newRow.append(hourList[6])
+            newProj.addRow(self.addprojectUI['ProjectNameEntry'].get(), newRow)
         self.removehoursmenu()
         return
 
