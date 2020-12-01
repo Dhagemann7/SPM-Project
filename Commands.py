@@ -14,7 +14,10 @@ def removeMenu(buttons):
     buttons['AddHours'].place_forget()
     return
 
-def AddProject(name,owner,members,description):
+def AddProject(name,owner,members,description,risks,riskStatus):
+    newProj = Project()
+    newProj.createFile(name, owner, members, description, risks, riskStatus)
+    #App.removeprojectmenu()
     #create new Project object from inputs (confirm button) -> go to project view
         #Project Name
         #Project Owner

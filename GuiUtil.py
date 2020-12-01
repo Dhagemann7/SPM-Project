@@ -5,6 +5,8 @@ from tkinter import *
 #Pillow is not included in standard library, must be installed to your python library first.
 import PIL
 from PIL import ImageTk, Image
+import ProjectUtil
+from ProjectUtil import Project
 
 class AppWindow(tkinter.Frame):
     def __init__(self, master=None):
@@ -70,7 +72,6 @@ class AppWindow(tkinter.Frame):
         return panel
 
     def removeMenu(self):
-        #print(self.menuButtons)
         self.menuButtons['AddProject'].place_forget()
         self.menuButtons['AddHours'].place_forget()
         self.menuButtons['ViewProjects'].place_forget()
@@ -89,6 +90,8 @@ class AppWindow(tkinter.Frame):
         self.menuButtons['AddProject'].place(relx=0.5, rely=0.3, anchor = 'center')
         #self.menuButtons['AddProject'].Command = Commands.removeMenu(self.menuButtons)
 
+
+
     def addprojectmenu(self):
 
         self.removeMenu()
@@ -96,20 +99,65 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['BackButtonProject'].place(relx=0.003, rely=0.01, anchor = 'nw')
 
         self.addprojectUI['NameLabel'] = tkinter.Label(self.master, text = 'Project Name')
-        self.addprojectUI['NameLabel'].place(relx=0.25, rely=0.45)
+        self.addprojectUI['NameLabel'].place(relx=0.25, rely=0.35)
 
         self.addprojectUI['NameEntry'] = tkinter.Entry(self.master)
-        self.addprojectUI['NameEntry'].place(relx=0.25, rely=0.5)
+        self.addprojectUI['NameEntry'].place(relx=0.25, rely=0.4)
 
-        self.addprojectUI['SaveProject'] = self.enterImageButton(self.master, 'SaveProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.addprojectUI['OwnerLabel'] = tkinter.Label(self.master, text = 'Project Owner')
+        self.addprojectUI['OwnerLabel'].place(relx=0.45, rely=0.35)
+
+        self.addprojectUI['OwnerEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['OwnerEntry'].place(relx=0.45, rely=0.4)
+
+        self.addprojectUI['MembersLabel'] = tkinter.Label(self.master, text = 'Project Members - Seperate by commas')
+        self.addprojectUI['MembersLabel'].place(relx=0.65, rely=0.35)
+
+        self.addprojectUI['MembersEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['MembersEntry'].place(relx=0.65, rely=0.4)
+
+        self.addprojectUI['DescriptionLabel'] = tkinter.Label(self.master, text = 'Project Description')
+        self.addprojectUI['DescriptionLabel'].place(relx=0.25, rely=0.55)
+
+        self.addprojectUI['DescriptionEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['DescriptionEntry'].place(relx=0.25, rely=0.6)
+
+        self.addprojectUI['RisksLabel'] = tkinter.Label(self.master, text = 'Project Risks - Seperate by commas')
+        self.addprojectUI['RisksLabel'].place(relx=0.45, rely=0.55)
+
+        self.addprojectUI['RisksEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['RisksEntry'].place(relx=0.45, rely=0.6)
+
+        self.addprojectUI['RiskStatusLabel'] = tkinter.Label(self.master, text = 'Project RiskStatus - Seperate by commas')
+        self.addprojectUI['RiskStatusLabel'].place(relx=0.65, rely=0.55)
+
+        self.addprojectUI['RiskStatusEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['RiskStatusEntry'].place(relx=0.65, rely=0.6)
+        self.addprojectUI['SaveProject'] = self.enterImageButton(self.master, 'SaveProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Command = lambda : self.AddProject())
         self.addprojectUI['SaveProject'].place(relx=0.5, rely=0.9, anchor='center')
 
+    def AddProject(self):
+        newProj = Project()
+        newProj.createFile(self.addprojectUI['NameEntry'].get(), self.addprojectUI['OwnerEntry'].get(), self.addprojectUI['MembersEntry'].get(), self.addprojectUI['DescriptionEntry'].get(), self.addprojectUI['RisksEntry'].get(), self.addprojectUI['RiskStatusEntry'].get())
+        self.removeprojectmenu()
+        self.loadMenu()
+        #Commands.AddProject(self.addprojectUI['NameEntry'].get(), self.addprojectUI['OwnerEntry'].get(), self.addprojectUI['MembersEntry'].get(), self.addprojectUI['DescriptionEntry'].get(), self.addprojectUI['RisksEntry'].get(), self.addprojectUI['RiskStatusEntry'].get())
 
 
     def removeprojectmenu(self):
 
         self.addprojectUI['NameEntry'].place_forget()
         self.addprojectUI['NameLabel'].place_forget()
+        self.addprojectUI['OwnerLabel'].place_forget()
+        self.addprojectUI['OwnerEntry'].place_forget()
+        self.addprojectUI['MembersLabel'].place_forget()
+        self.addprojectUI['MembersEntry'].place_forget()
+        self.addprojectUI['DescriptionLabel'].place_forget()
+        self.addprojectUI['DescriptionEntry'].place_forget()
+        self.addprojectUI['RisksLabel'].place_forget()
+        self.addprojectUI['RisksEntry'].place_forget()
+        self.addprojectUI['RiskStatusLabel'].place_forget()
+        self.addprojectUI['RiskStatusEntry'].place_forget()
         self.addprojectUI['BackButtonProject'].place_forget()
         self.addprojectUI['SaveProject'].place_forget()
 

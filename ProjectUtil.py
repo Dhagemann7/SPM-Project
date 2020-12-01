@@ -11,32 +11,39 @@ class Project():
     #all other arguments are strings.
     #In the case of an existing file with the same name, the old file will be overwritten.
     #In the event of there being more than one row, all 'blank' elements will be filled with an empty string.
-    def createFile(self, name, owner, members, description, risks, riskStatus, requirements, hoursTotal, hoursRequirementsAnalysis, hoursDesigning, hoursCoding, hoursTesting, hoursProjectManagement):
+    def createFile(self, name, owner, members, description, risks, riskStatus):
+        if(members == ''):
+            self.members = ['']
+        elif(',' in members):
+            self.members = members.split(',')
+        else:
+            self.members = [members]
+        if(risks == ''):
+            self.risks = ['']
+        elif(',' in risks):
+            self.risks = risks.split(',')
+        else:
+            self.risks = [risks]
+        if(riskStatus == ''):
+            self.riskStatus = ['']
+        elif(',' in riskStatus):
+            self.riskStatus = riskStatus.split(',')
+        else:
+            self.riskStatus = [riskStatus]
         self.name = name
         self.path = str(os.path.dirname(os.path.realpath(__file__))) + '\\ProjectFiles\\' + name + '.csv'
         self.owner = owner
-        self.members = members
         self.description = description
-        self.risks = risks
-        self.riskStatus = riskStatus
-        self.requirements = requirements
-        self.hoursTotal = hoursTotal
-        self.hoursRequirementsAnalysis = hoursRequirementsAnalysis
-        self.hoursDesigning = hoursDesigning
-        self.hoursCoding = hoursCoding
-        self.hoursTesting = hoursTesting
-        self.hoursProjectManagement = hoursProjectManagement
         with open(self.path, mode = 'w') as projectFileWrite:
             writer = csv.writer(projectFileWrite, delimiter = ',', lineterminator = '\n')
-            row1 = ['Project Name', 'Project Owner', 'Members', 'Description', 'Risks', 'Risk Status', 'Requirements', 'Person Hours Total', 'Requirements Analysis Hours', 'Designing Hours', 'Coding Hours', 'Testing Hours', 'Project Management Hours']
+            row1 = ['Project Name', 'Project Owner', 'Members', 'Description', 'Risks', 'Risk Status', 'Functional Requirements', 'Nonfunctional Requirements', 'Week Number', 'Person Hours Total', 'Requirements Analysis Hours', 'Designing Hours', 'Coding Hours', 'Testing Hours', 'Project Management Hours']
             writer.writerow(row1)
-            row2 = [self.name, self.owner, self.members[0], self.description, self.risks[0], self.riskStatus[0], self.requirements[0], self.hoursTotal, self.hoursRequirementsAnalysis, self.hoursDesigning, self.hoursCoding, self.hoursTesting, self.hoursProjectManagement]
+            row2 = [self.name, self.owner, self.members[0], self.description, self.risks[0], self.riskStatus[0], '', '', '', '', '', '', '', '', '']
             writer.writerow(row2)
             lengths = []
             lengths.append(len(self.members))
             lengths.append(len(self.risks))
             lengths.append(len(self.riskStatus))
-            lengths.append(len(self.requirements))
             lengths.sort()
             longestList = lengths[-1]
             #I'm sure this can be cleaned up in some way later but for now whatever it works.
@@ -55,10 +62,7 @@ class Project():
                     addingList.append(self.riskStatus[x])
                 else:
                     addingList.append('')
-                if(x < len(self.requirements)):
-                    addingList.append(self.requirements[x])
-                else:
-                    addingList.append('')
+                addingList.append('')
                 addingList.append('')
                 addingList.append('')
                 addingList.append('')
