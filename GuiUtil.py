@@ -273,8 +273,9 @@ class AppWindow(tkinter.Frame):
                 pass
         if(found):
             newRow = contents['rows'][row]
-            print(len(newRow))
-            print(len(hourList))
+            diff = 15 - len(newRow)
+            for x in range(diff):
+                newRow.append('')
             newRow[8] = hourList[0]
             newRow[9] = hourList[1]
             newRow[10] = hourList[2]
