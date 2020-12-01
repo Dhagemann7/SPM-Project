@@ -34,7 +34,7 @@ def AddRisks(project,riskName,status):
         #Risk Name
         #Risk Status
 
-    project.addRisk(riskName,status)
+    #project.addRisk(riskName,status)
 
     #return to project view
 
@@ -45,7 +45,7 @@ def AddRequirements(project, rtype, requirement):
         #Functional Requirements
         #Non-Functional Requirements
 
-    project.addRequirement(rtype, requirement)
+    #project.addRequirement(rtype, requirement)
 
     # return to project view
 
@@ -60,7 +60,7 @@ def AddHours(project,week,requirementsHours,designHours,codingHours,testingHours
         #Testing Hours
         #Project Management Hours
 
-    project.addWeekHours(requirementsHours,designHours,codingHours,testingHours,projManagementHours)
+    #project.addWeekHours(requirementsHours,designHours,codingHours,testingHours,projManagementHours)
 
     #return to project view
 
