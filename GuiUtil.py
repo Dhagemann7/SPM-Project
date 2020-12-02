@@ -83,7 +83,7 @@ class AppWindow(tkinter.Frame):
         BackgroundImage = self.enterImage(self.master, 'Background.jpg', 'top', 'center', self.width, self.height)
         self.menuButtons['Exit'] = self.enterImageButton(self.master, 'Exit.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
         self.menuButtons['Exit'].place(relx=0.003, rely=0.01, anchor = 'nw')
-        self.menuButtons['AddRequirements'] = self.enterImageButton(self.master, 'AddRequirements.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
+        self.menuButtons['AddRequirements'] = self.enterImageButton(self.master, 'AddRequirements.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addRequirementsMenu)
         self.menuButtons['AddRequirements'].place(relx=0.5, rely=0.4, anchor = 'center')
         self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
         self.menuButtons['AddHours'].place(relx=0.5, rely=0.6, anchor = 'center')
@@ -163,6 +163,142 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['RiskStatusEntry'].place_forget()
         self.addprojectUI['BackButtonProject'].place_forget()
         self.addprojectUI['SaveProject'].place_forget()
+
+    def addRequirementsMenu(self):
+
+        self.removeMenu()
+        self.addprojectUI['BackButtonRequirements'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top', 'center',
+                                                                       int(self.width * .1), int(self.height * .1),
+                                                                       self.removehoursmenu, self.loadMenu)
+        self.addprojectUI['BackButtonRequirements'].place(relx=0.003, rely=0.01, anchor='nw')
+
+
+
+        self.addprojectUI['AddRequirements'] = self.enterImageButton(self.master, 'Submit.png', 'top', 'center',
+                                                              int(self.width * .1), int(self.height * .1),
+                                                              Command = lambda: self.addRequirements())
+        self.addprojectUI['AddRequirements'].place(relx=0.5, rely=0.9, anchor = 'center')
+
+        self.addprojectUI['RequirementsLabel'] = tkinter.Label(self.master, text='Add requirements, seperated by commas.')
+        self.addprojectUI['RequirementsLabel'].place(relx=0.5, rely=0.05, anchor = 'n')
+
+        self.addprojectUI['ProjectNameLabel'] = tkinter.Label(self.master, text='Project Name')
+        self.addprojectUI['ProjectNameLabel'].place(relx=0.45, rely=0.25, anchor = 'w')
+        
+        self.addprojectUI['ProjectNameEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['ProjectNameEntry'].place(relx=0.45, rely=0.3, anchor = 'w')
+
+        self.addprojectUI['FunctionalRequirementsLabel'] = tkinter.Label(self.master, text='Functional Requirements')
+        self.addprojectUI['FunctionalRequirementsLabel'].place(relx=0.45, rely=0.45, anchor = 'w')
+
+        self.addprojectUI['FunctionalRequirementsEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['FunctionalRequirementsEntry'].place(relx=0.45, rely=0.5, anchor = 'w')
+
+        self.addprojectUI['NonFunctionalRequirementsLabel'] = tkinter.Label(self.master, text='NonFunctional Requirements')
+        self.addprojectUI['NonFunctionalRequirementsLabel'].place(relx=0.45, rely=0.65, anchor = 'w')
+
+        self.addprojectUI['NonFunctionalRequirementsEntry'] = tkinter.Entry(self.master)
+        self.addprojectUI['NonFunctionalRequirementsEntry'].place(relx=0.45, rely=0.7, anchor = 'w')
+
+    def addRequirements(self):
+        newProj = Project()
+        contents = newProj.readFile(self.addprojectUI['ProjectNameEntry'].get())
+        functionalRequirementsList = []
+        nonFunctionalRequirementsList = []
+        if(self.addprojectUI['FunctionalRequirementsEntry'].get() == ''):
+            pass
+        elif(',' in self.addprojectUI['FunctionalRequirementsEntry'].get()):
+            functionalRequirementsList = (self.addprojectUI['FunctionalRequirementsEntry'].get().split(','))
+        else:
+            functionalRequirementsList.append(self.addprojectUI['FunctionalRequirementsEntry'].get())
+        if(self.addprojectUI['NonFunctionalRequirementsEntry'].get() == ''):
+            pass
+        elif(',' in self.addprojectUI['NonFunctionalRequirementsEntry'].get()):
+            nonFunctionalRequirementsList = (self.addprojectUI['NonFunctionalRequirementsEntry'].get().split(','))
+        else:
+            nonFunctionalRequirementsList.append(self.addprojectUI['NonFunctionalRequirementsEntry'].get())
+        if(len(functionalRequirementsList) != 0):
+            for y in range(len(functionalRequirementsList)):
+                found = False
+                row = 0
+                newRow = []
+                for x in range(len(contents['rows'])):
+                    if(contents['rows'][x][6] == '' and not found):
+                        row = x
+                        found = True
+                        break
+                    else:
+                        pass
+                if(found):
+                    newRow = contents['rows'][row]
+                    diff = 15 - len(newRow)
+                    newRow[6] = functionalRequirementsList[y]
+                    newProj.editRow(self.addprojectUI['ProjectNameEntry'].get(), row, newRow)
+                else:
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append(functionalRequirementsList[y])
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newProj.addRow(self.addprojectUI['ProjectNameEntry'].get(), newRow)
+        if(len(nonFunctionalRequirementsList) != 0):
+            for y in range(len(nonFunctionalRequirementsList)):
+                found = False
+                row = 0
+                newRow = []
+                for x in range(len(contents['rows'])):
+                    if(contents['rows'][x][7] == '' and not found):
+                        row = x
+                        found = True
+                        break
+                    else:
+                        pass
+                if(found):
+                    newRow = contents['rows'][row]
+                    newRow[7] = nonFunctionalRequirementsList[y]
+                    newProj.editRow(self.addprojectUI['ProjectNameEntry'].get(), row, newRow)
+                else:
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append(nonFunctionalRequirementsList[y])
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newRow.append('')
+                    newProj.addRow(self.addprojectUI['ProjectNameEntry'].get(), newRow)
+        self.removerequirementsmenu()
+
+    def removerequirementsmenu(self):
+
+        self.addprojectUI['BackButtonRequirements'].place_forget()
+        self.addprojectUI['AddRequirements'].place_forget()
+        self.addprojectUI['RequirementsLabel'].place_forget()
+        self.addprojectUI['ProjectNameLabel'].place_forget()
+        self.addprojectUI['ProjectNameEntry'].place_forget()
+        self.addprojectUI['FunctionalRequirementsLabel'].place_forget()
+        self.addprojectUI['FunctionalRequirementsEntry'].place_forget()
+        self.addprojectUI['NonFunctionalRequirementsLabel'].place_forget()
+        self.addprojectUI['NonFunctionalRequirementsEntry'].place_forget()
+        self.loadMenu()
+        return
 
     def addHoursmenu(self):
 
