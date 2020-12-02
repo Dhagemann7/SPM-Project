@@ -21,7 +21,6 @@ class AppWindow(tkinter.Frame):
         self.height = dimFrame.winfo_height()
         dimFrame.pack_forget()
         dimFrame.destroy()
-        self.menuButtons = {}
         self.addprojectUI = {}
         self.loadMenu()
         
@@ -72,26 +71,26 @@ class AppWindow(tkinter.Frame):
         return panel
 
     def removeMenu(self):
-        self.menuButtons['AddProject'].place_forget()
-        self.menuButtons['AddHours'].place_forget()
-        self.menuButtons['ViewProjects'].place_forget()
-        self.menuButtons['Exit'].place_forget()
-        self.menuButtons['AddRequirements'].place_forget()
+        self.addprojectUI['AddProject'].place_forget()
+        self.addprojectUI['AddHours'].place_forget()
+        self.addprojectUI['ViewProjects'].place_forget()
+        self.addprojectUI['Exit'].place_forget()
+        self.addprojectUI['AddRequirements'].place_forget()
 
     def loadMenu(self):
 
         BackgroundImage = self.enterImage(self.master, 'Background.jpg', 'top', 'center', self.width, self.height)
-        self.menuButtons['Exit'] = self.enterImageButton(self.master, 'Exit.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
-        self.menuButtons['Exit'].place(relx=0.003, rely=0.01, anchor = 'nw')
-        self.menuButtons['AddRequirements'] = self.enterImageButton(self.master, 'AddRequirements.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addRequirementsMenu)
-        self.menuButtons['AddRequirements'].place(relx=0.5, rely=0.4, anchor = 'center')
-        self.menuButtons['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
-        self.menuButtons['AddHours'].place(relx=0.5, rely=0.6, anchor = 'center')
-        self.menuButtons['ViewProjects'] = self.enterImageButton(self.master, 'ViewProjects.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addViewProject)
-        self.menuButtons['ViewProjects'].place(relx=0.5, rely=0.8, anchor = 'center')
-        self.menuButtons['AddProject'] = self.enterImageButton(self.master, 'AddProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addprojectmenu)
-        self.menuButtons['AddProject'].place(relx=0.5, rely=0.2, anchor = 'center')
-        #self.menuButtons['AddProject'].Command = Commands.removeMenu(self.menuButtons)
+        self.addprojectUI['Exit'] = self.enterImageButton(self.master, 'Exit.png', 'top', 'center', int(self.width * .1), int(self.height * .1), Commands.ExitButton)
+        self.addprojectUI['Exit'].place(relx=0.003, rely=0.01, anchor = 'nw')
+        self.addprojectUI['AddRequirements'] = self.enterImageButton(self.master, 'AddRequirements.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addRequirementsMenu)
+        self.addprojectUI['AddRequirements'].place(relx=0.5, rely=0.4, anchor = 'center')
+        self.addprojectUI['AddHours'] = self.enterImageButton(self.master, 'AddHours.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addHoursmenu)
+        self.addprojectUI['AddHours'].place(relx=0.5, rely=0.6, anchor = 'center')
+        self.addprojectUI['ViewProjects'] = self.enterImageButton(self.master, 'ViewProjects.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addViewProject)
+        self.addprojectUI['ViewProjects'].place(relx=0.5, rely=0.8, anchor = 'center')
+        self.addprojectUI['AddProject'] = self.enterImageButton(self.master, 'AddProject.png', 'top', 'center', int(self.width * .1), int(self.height * .1), self.addprojectmenu)
+        self.addprojectUI['AddProject'].place(relx=0.5, rely=0.2, anchor = 'center')
+        #self.addprojectUI['AddProject'].Command = Commands.removeMenu(self.addprojectUI)
 
 
 
@@ -169,7 +168,7 @@ class AppWindow(tkinter.Frame):
         self.removeMenu()
         self.addprojectUI['BackButtonRequirements'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top', 'center',
                                                                        int(self.width * .1), int(self.height * .1),
-                                                                       self.removehoursmenu, self.loadMenu)
+                                                                       self.removerequirementsmenu, self.loadMenu)
         self.addprojectUI['BackButtonRequirements'].place(relx=0.003, rely=0.01, anchor='nw')
 
 
@@ -295,6 +294,7 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['ProjectNameEntry'].place_forget()
         self.addprojectUI['FunctionalRequirementsLabel'].place_forget()
         self.addprojectUI['FunctionalRequirementsEntry'].place_forget()
+        self.addprojectUI['AddRequirements'].place_forget()
         self.addprojectUI['NonFunctionalRequirementsLabel'].place_forget()
         self.addprojectUI['NonFunctionalRequirementsEntry'].place_forget()
         self.loadMenu()
@@ -558,87 +558,86 @@ class AppWindow(tkinter.Frame):
         self.codingHoursLabels = []
         self.testingHoursLabels = []
         self.projectManagementLabels = []
-        print(len(self.contents['rows']))
         for x in range(len(self.contents['rows'])):
-            if(x == 0):
+            y = len(self.contents['rows']) - x - 1
+            if(y == 0):
                 pass
             else:
-                diff = 14 - len(self.contents['rows'][x])
+                diff = 14 - len(self.contents['rows'][y])
                 
                 for x in range(diff):
-                    self.contents['rows'][x].append('')
-                print(len(self.contents['rows'][x]))
-                if(self.contents['rows'][x][2] == ''):
+                    self.contents['rows'][y].append('')
+                if(self.contents['rows'][y][2] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][2])
-                    label.place(relx=widths[0], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][2])
+                    label.place(relx=widths[0], rely=(.17+(y*.05)), anchor = 'w')
                     self.memberLabels.append(label)
-                if(self.contents['rows'][x][3] == ''):
+                if(self.contents['rows'][y][3] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][3])
-                    label.place(relx=widths[1], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][3])
+                    label.place(relx=widths[1], rely=(.17+(y*.05)), anchor = 'w')
                     self.riskLabels.append(label)
-                if(self.contents['rows'][x][4] == ''):
+                if(self.contents['rows'][y][4] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][4])
-                    label.place(relx=widths[2], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][4])
+                    label.place(relx=widths[2], rely=(.17+(y*.05)), anchor = 'w')
                     self.riskStatusLabels.append(label)
-                if(self.contents['rows'][x][5] == ''):
+                if(self.contents['rows'][y][5] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][5])
-                    label.place(relx=widths[3], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][5])
+                    label.place(relx=widths[3], rely=(.17+(y*.05)), anchor = 'w')
                     self.functionalRequirementLabels.append(label)
-                if(self.contents['rows'][x][6] == ''):
+                if(self.contents['rows'][y][6] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][6])
-                    label.place(relx=widths[4], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][6])
+                    label.place(relx=widths[4], rely=(.17+(y*.05)), anchor = 'w')
                     self.nonFunctionalRequirementLabels.append(label)
-                if(self.contents['rows'][x][7] == ''):
+                if(self.contents['rows'][y][7] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][7])
-                    label.place(relx=widths[5], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][7])
+                    label.place(relx=widths[5], rely=(.17+(y*.05)), anchor = 'w')
                     self.weekNumberLabels.append(label)
-                if(self.contents['rows'][x][8] == ''):
+                if(self.contents['rows'][y][8] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][8])
-                    label.place(relx=widths[6], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][8])
+                    label.place(relx=widths[6], rely=(.17+(y*.05)), anchor = 'w')
                     self.personHourLabels.append(label)
-                if(self.contents['rows'][x][9] == ''):
+                if(self.contents['rows'][y][9] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][9])
-                    label.place(relx=widths[7], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][9])
+                    label.place(relx=widths[7], rely=(.17+(y*.05)), anchor = 'w')
                     self.requirementsAnalysisLabels.append(label)
-                if(self.contents['rows'][x][10] == ''):
+                if(self.contents['rows'][y][10] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][10])
-                    label.place(relx=widths[8], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][10])
+                    label.place(relx=widths[8], rely=(.17+(y*.05)), anchor = 'w')
                     self.designingHoursLabels.append(label)
-                if(self.contents['rows'][x][11] == ''):
+                if(self.contents['rows'][y][11] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][11])
-                    label.place(relx=widths[9], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][11])
+                    label.place(relx=widths[9], rely=(.17+(y*.05)), anchor = 'w')
                     self.codingHoursLabels.append(label)
-                if(self.contents['rows'][x][12] == ''):
+                if(self.contents['rows'][y][12] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][12])
-                    label.place(relx=widths[10], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][12])
+                    label.place(relx=widths[10], rely=(.17+(y*.05)), anchor = 'w')
                     self.testingHoursLabels.append(label)
-                if(self.contents['rows'][x][13] == ''):
+                if(self.contents['rows'][y][13] == ''):
                     pass
                 else:
-                    label = tkinter.Label(self.master, text = self.contents['rows'][x][13])
-                    label.place(relx=widths[11], rely=(.17+(x*.05)), anchor = 'w')
+                    label = tkinter.Label(self.master, text = self.contents['rows'][y][13])
+                    label.place(relx=widths[11], rely=(.17+(y*.05)), anchor = 'w')
                     self.projectManagementLabels.append(label)
 
         self.allLabels = []
@@ -660,6 +659,21 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['EnterProject'].place_forget()
         self.addprojectUI['LoadEntry'].place_forget()
         self.addprojectUI['LoadProject'].place_forget()
+        self.addprojectUI['ProjectName'].place_forget()
+        self.addprojectUI['ProjectDescription'].place_forget()
+        self.addprojectUI['ProjectOwner'].place_forget()
+        self.addprojectUI['MembersTitle'].place_forget()
+        self.addprojectUI['RisksTitle'].place_forget()
+        self.addprojectUI['RiskStatusTitle'].place_forget()
+        self.addprojectUI['FunctionalRequirementsTitle'].place_forget()
+        self.addprojectUI['NonFunctionalRequirementsTitle'].place_forget()
+        self.addprojectUI['WeekNumberTitle'].place_forget()
+        self.addprojectUI['PersonHoursTotalTitle'].place_forget()
+        self.addprojectUI['DesigningHoursTitle'].place_forget()
+        self.addprojectUI['CodingHoursTitle'].place_forget()
+        self.addprojectUI['TestingHoursTitle'].place_forget()
+        self.addprojectUI['ProjectManagementTitle'].place_forget()
+        self.addprojectUI['RequirementsAnalysisHoursTitle'].place_forget()
         for x in range(len(self.allLabels)):
             for y in range(len(self.allLabels[x])):
                 self.allLabels[x][y].place_forget()
