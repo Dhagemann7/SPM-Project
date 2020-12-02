@@ -472,7 +472,7 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['BackButtonView'] = self.enterImageButtonTwoFunc(self.master, 'Back.png', 'top',
                                                                             'center',
                                                                             int(self.width * .1), int(self.height * .1),
-                                                                            self.removeViewProject, self.loadMenu)
+                                                                            self.removeLoadProject, self.loadMenu)
         self.addprojectUI['BackButtonView'].place(relx=0.003, rely=0.01, anchor='nw')
 
         self.addprojectUI['EnterProject'] = tkinter.Label(self.master, text = 'Type in Project name to load.')
@@ -679,6 +679,15 @@ class AppWindow(tkinter.Frame):
                 self.allLabels[x][y].place_forget()
         self.loadMenu()
         return
+
+    def removeLoadProject(self):
+        self.addprojectUI['BackButtonView'].place_forget()
+        self.addprojectUI['EnterProject'].place_forget()
+        self.addprojectUI['LoadEntry'].place_forget()
+        self.addprojectUI['LoadProject'].place_forget()
+        return
+
+
 
 
 
