@@ -297,7 +297,6 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['AddRequirements'].place_forget()
         self.addprojectUI['NonFunctionalRequirementsLabel'].place_forget()
         self.addprojectUI['NonFunctionalRequirementsEntry'].place_forget()
-        self.loadMenu()
         return
 
     def addHoursmenu(self):
@@ -462,7 +461,6 @@ class AppWindow(tkinter.Frame):
         self.addprojectUI['TestingEntry'].place_forget()
         self.addprojectUI['ProjectManagementLabel'].place_forget()
         self.addprojectUI['ProjectManagementEntry'].place_forget()
-        self.loadMenu()
         return
 
     def addViewProject(self):
@@ -677,7 +675,6 @@ class AppWindow(tkinter.Frame):
         for x in range(len(self.allLabels)):
             for y in range(len(self.allLabels[x])):
                 self.allLabels[x][y].place_forget()
-        self.loadMenu()
         return
 
     def removeLoadProject(self):
